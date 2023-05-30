@@ -136,5 +136,35 @@
                 </div>
             </div>
         </div>
+        <?php
+            /*$response = Http::get('http://standards-oui.ieee.org/oui/oui.csv');
+            $data = $response->body();
+    
+            $rows = explode("\n", $data);
+            $skipFirstRow = true;
+
+            foreach ($rows as $row) {
+                if ($skipFirstRow) {
+                    $skipFirstRow = false;
+                    continue;
+                }
+            
+                $fields = str_getcsv($row);
+                echo '<div class="row">'.json_encode($fields).'</div>';
+                print_r($fields);
+            }*/
+
+            $handle = fopen('http://standards-oui.ieee.org/oui/oui.csv', 'r');
+
+            // Skip the first row (headers)
+            fgetcsv($handle);
+
+            // Truncate the table to remove existing records
+            DB::table('oui_data')->truncate();
+
+            while (($fields = fgetcsv($handle)) !== false) {
+                print_r($fields);
+            }
+        ?>
     </body>
 </html>
