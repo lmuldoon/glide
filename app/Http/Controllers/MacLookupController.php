@@ -13,17 +13,18 @@ class MacLookupController extends Controller
         // Retrieve the MAC addresses from the request
         $macAddresses = $request->input('mac_addresses');
 
+        $macAddresses = strtoupper($macAddresses);
+        
         // Ensure at least one MAC address is provided
         if (empty($macAddresses)) {
             return response()->json(['error' => 'At least one MAC address is required.'], 400);
         }
-
-        // Normalize MAC addresses to uppercase and remove any special characters
-        $macAddresses = preg_replace('/[^A-F0-9]/', '', strtoupper($macAddresses));
-
         // Split MAC addresses into an array
         $macAddresses = explode(',', $macAddresses);
 
+        // Normalize MAC addresses to uppercase and remove any special characters
+        $macAddresses = preg_replace('/[^A-Za-z0-9]/', '', $macAddresses);
+        
         // Prepare the response array
         $response = [];
 
