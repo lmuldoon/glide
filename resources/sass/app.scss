@@ -6,3 +6,15 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+
+body {
+    min-height:100vh;
+    background:#f3f3f3;
+    padding:20px 0;
+    .btn {
+        background:#e71e72;
+    border:none;
+    margin:10px 0;
+    }
+}

@@ -47,6 +47,25 @@ class MacLookupController extends Controller
             ];
         }
 
-        return response()->json($response);
+        if (!$request->isMethod('post')) {
+            // If the form is submitted
+            return response()->json($response);
+        } else {
+            // If it is not a form submission
+            $request->session()->flash('mac_lookup_result', $response);
+            
+            // Redirect back to the form page
+            return redirect()->route('mac-lookup-result');
+        }
     }
+
+    public function showForm(Request $request)
+    {
+        // Retrieve the result from session
+        $result = $request->session()->get('mac_lookup_result');
+        
+        //return view('mac-lookup-result', ['response' => $response]);
+        return view('mac-lookup-result', compact('result'));
+    }
+
 }

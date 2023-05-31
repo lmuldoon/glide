@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MacLookupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/mac-lookup', [MacLookupController::class, 'lookup'])->name('mac-lookup');
+
+Route::get('/mac-lookup-result', [MacLookupController::class, 'showForm'])->name('mac-lookup-result');

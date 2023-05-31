@@ -18,12 +18,12 @@
     </head>
     <body class="antialiased">
         <div class="container">
-            <form action="{{ route('mac-lookup') }}" method="POST">
-                @csrf
-                <label>Enter mac address(es)</label>
-                <input class="form-control" type="text" name="mac_addresses" placeholder="Enter MAC addresses (comma-separated)" required>
-                <button type="submit" class="btn btn-primary">Lookup</button>
-            </form>
+            <pre>
+                {{ print_r($result) }}
+            </pre>
+
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
         </div>
+    
     </body>
 </html>
